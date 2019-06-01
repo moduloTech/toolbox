@@ -75,7 +75,9 @@ In any case, you have to push at least two times per **feature branch**:
 * One push as soon as you start working on the issue (and push the branch to gitlab)
 * One push when you are done with your work
 
-Caution: You have to push your code everytime you leave the office, especially at the end of the day.
+```diff
+- Caution: You have to push your code everytime you leave the office, especially at the end of the day.
+```
 
 # To-dos
 
