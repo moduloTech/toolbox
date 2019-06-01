@@ -24,6 +24,9 @@ Any issue that you work on should be handled in a **feature branch** with the fo
   * You can be much more picky when taking your **feature screenshots** (see below)
 
 ## Feature screenshots
+
+Beauty is at the core of our apps and philosophy, therefore, everytime you update a view or anything that is visible by the end-user, you **have to** include a screenshot (or video) of your changes in the MR (not the issue).
+
 ## How
 ## When
 
