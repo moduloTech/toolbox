@@ -63,6 +63,20 @@ As a developer, if the reviewer re-assigned the merge request to you, you **have
 
 ## When
 
+Branch early, branch often.
+
+As soon as you start working on an issue, open a branch and push it to our gitlab server.
+
+# Push policy
+
+You should push as often as possible your work in order to avoid any code loss.
+
+In any case, you have to push at least two times per **feature branch**:
+* One push as soon as you start working on the issue (and push the branch to gitlab)
+* One push when you are done with your work
+
+Caution: You have to push your code everytime you leave the office, especially at the end of the day.
+
 # To-dos
 
 List here all the section and stuff you would like or whish someone could to talk about in a next PR
