@@ -34,7 +34,7 @@ Any issue that you work on should be handled in a **feature branch** with the fo
   * It greatly helps the reviewer to understand what the PR's topic is
   * If the reviewer has comments awaiting for your response, you will only slow down the release of this particular feature instead of your whole work
   * Cherry picking is now super easy too
-  * You can be much more picky when taking your **feature screenshots** (see below)
+  * You can be much more picky when taking your **feature screenshots** since we are speaking only about one specific topic (see below)
 
 ## Feature screenshots
 
