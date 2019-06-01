@@ -42,7 +42,7 @@ Exemple below:
 
 ````ruby
   private
-    # philib_j
+    # Author: philib_j
     # Updates the proper attribute for the expiration date
     def fetch_and_update_expiration_date
       # collect the current expiration date
