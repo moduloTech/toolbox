@@ -1,4 +1,4 @@
-# Warning
+# Before you keep reading
 
 This readme file is only for the eyes of the Ruby On Rails teams at moduloTech.
 
