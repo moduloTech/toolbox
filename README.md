@@ -10,6 +10,52 @@ Standardizing our development process and habits is part of our startegy to embr
 
 This Handbook has been written and updated by all the developers of moduloTech, feel free to submit your own pull request and keep this page **beautiful** and **uptodate**
 
+# Comments
+
+Commenting your code is mandatory and part of the process of making friends at moduloTech YaY 😃 
+
+## Classes
+
+Each Class file needs at least an author and a text that describes the purpose of this class. See example below:
+
+````ruby
+# Author: philib_j
+# Purchase model has a very simple purpose, it is storing all the purchases
+# that we maid along with the PDF
+# it belongs to a supplier
+# it doesn't contain any financial data, they are all stored on the bill object
+class Purchase < ApplicationRecord
+end
+````
+
+## Functions
+
+Functions should have commments in&out:
+* IN
+  * Reading the comments should describe everything going on in the function
+  * I know, Ruby is super easy to read and doesn't require much commenting. Don't be a player here, just comment your code like it was designed to send a rocket on the moon. And yes, we do send rockets on the moon!
+* OUT
+  * Add your name along with the list of authors
+  * Add a short description about what the function does
+  
+Exemple below:
+
+````ruby
+  private
+    # philib_j
+    # Updates the proper attribute for the expiration date
+    def fetch_and_update_expiration_date
+      # collect the current expiration date
+      current_expiration_date = self.expiration_date
+      
+      # Fetch the real expiration date of the HTTPs certificate
+      new_expiration_date = WebCertificatesService.fetch_expiry_date(self.url)
+      
+      #Update the expiration date if new expiration date has real value or keep the old one
+      self.update_attribute(:expiration_date, new_expiration_date || current_expiration_date)
+    end
+````
+
 # Branches
 
 At moduloTech we like to keep things *easy-to-understand* and clean.
@@ -84,6 +130,5 @@ In any case, you have to push at least two times per **feature branch**:
 List here all the section and stuff you would like or whish someone could to talk about in a next PR
 
 * moduloTech gem
-* Comments
 * Rubocop
 * CI/CD
