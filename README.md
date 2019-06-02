@@ -134,5 +134,6 @@ List here all the section and stuff you would like or whish someone could to tal
 * Rubocop
 * CI/CD
 
-# Authors
-* philib_j
+# Changes
+* ...
+* philib_j - initial commit
