@@ -18,7 +18,7 @@ Commenting your code is mandatory and part of the process of making friends at m
 
 ## Classes
 
-Each Class file needs at least an author and a text that describes the purpose of this class. See example below:
+Each Class file needs at least an **author** and a **description** that describes the purpose of this class. See example below:
 
 ````ruby
 # Author: philib_j
@@ -32,11 +32,11 @@ end
 
 ## Functions
 
-Functions should have commments in&out:
-* IN
+Functions should have commments inside & outside:
+* Inside
   * Reading the comments should describe everything going on in the function
   * I know, Ruby is super easy to read and doesn't require much commenting. Don't be a player here, just comment your code like it was designed to send a rocket on the moon. And yes, we do send rockets on the moon!
-* OUT
+* Outside
   * Add your name along with the list of authors
   * Add a short description about what the function does
   
@@ -74,12 +74,17 @@ We have the following branches in each project:
     * Each issue has its own branch
 
 # Merge requests
+## When
+
+Branch early, branch often.
+
+As soon as you start working on an issue, open a branch and push it to our gitlab server.
 ## What
 
 Any issue that you work on should be handled in a **feature branch** with the following name format `#{issue-id} short description`.
 
 **feature branches** are very useful and efficient in the following scenarios:
-  * It greatly helps the reviewer to understand what the PR's topic is
+  * It greatly helps the reviewer to understand what the MR's topic is
   * If the reviewer has comments awaiting for your response, you will only slow down the release of this particular feature instead of your whole work
   * Cherry picking is now super easy too
   * You can be much more picky when taking your **feature screenshots** since we are speaking only about one specific topic (see below)
@@ -94,26 +99,20 @@ If you need to open a merge request, but are still working on your issue, you ha
 
 When your work is ready you can open a new merge request (or remove the WIP prefix).
 
-This merge request should have *staging* as the target branch.
+This merge request should have **staging** as the target branch.
 
 If you already know who is going to review your branch, you **have to** assign it to him/her.
 
 ## Reviews and comments
 
 As a reviewer, if you have any questions or require code changes in a merge request, you **have to**:
-* Comment as often as possible in the code
+* Comment as often as possible in the code in opposite to only one big comment in the MR
 * When done commenting, re-assign the merge request to the developper
 
 As a developer, if the reviewer re-assigned the merge request to you, you **have to**:
 * reply to the questions
 * pull the branch, update the code when needed, re-push your code
 * re-assign the merge request to the reviewer when you are done replying/updating your code
-
-## When
-
-Branch early, branch often.
-
-As soon as you start working on an issue, open a branch and push it to our gitlab server.
 
 # Push policy
 
@@ -134,3 +133,6 @@ List here all the section and stuff you would like or whish someone could to tal
 * moduloTech gem
 * Rubocop
 * CI/CD
+
+# Authors
+* philib_j
