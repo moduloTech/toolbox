@@ -10,6 +10,8 @@ Standardizing our development process and habits is part of our startegy to embr
 
 This Handbook has been written and updated by all the developers of moduloTech, feel free to submit your own pull request and keep this page **beautiful** and **uptodate**
 
+Any time you feel like someone is slipping away from this methodology, feel free to push them back to this document.
+
 # Comments
 
 Commenting your code is mandatory and part of the process of making friends at moduloTech YaY 😃 
