@@ -133,6 +133,10 @@ List here all the section and stuff you would like or whish someone could to tal
 * moduloTech gem
 * Rubocop
 * CI/CD
+* single-developer workflow - feature branches needed?
+* adopt rdoc or some other documentation standard for automation
+* develop an rspec test that will check the code comments consistensy
+* develop/adopt an instrument to automatically generate/update comments in the code
 
 # Changes
 * ...
