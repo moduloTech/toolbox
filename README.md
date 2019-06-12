@@ -2,19 +2,19 @@
 
 This readme file is only for the eyes of the Ruby On Rails teams at moduloTech.
 
-There are plans to update it to the rest of the world in a few weeks
+There are plans to update it to the rest of the world in a few weeks.
 
 # Introduction
 
-Standardizing our development process and habits is part of our startegy to embrace a pleasant journey as any developper belonging to moduloTech should be able to think and write code in the exact same way as another one.
+Standardizing our development process and habits is part of our strategy to embrace a pleasant journey as any developper belonging to moduloTech should be able to think and write code in the exact same way as another one.
 
-This Handbook has been written and updated by all the developers of moduloTech, feel free to submit your own pull request and keep this page **beautiful** and **uptodate**
+This Handbook has been written and updated by all the developers of moduloTech, feel free to submit your own pull request and keep this page **beautiful** and **up to date**.
 
 Any time you feel like someone is slipping away from this methodology, feel free to push them back to this document.
 
 # Comments
 
-Commenting your code is mandatory and part of the process of making friends at moduloTech YaY 😃 
+Commenting your code is mandatory and part of the process of making friends at moduloTech YaY 😃
 
 ## Classes
 
@@ -23,7 +23,7 @@ Each Class file needs at least an **author** and a **description** that describe
 ````ruby
 # Author: philib_j
 # Purchase model has a very simple purpose, it is storing all the purchases
-# that we maid along with the PDF
+# that we made along with the PDF
 # it belongs to a supplier
 # it doesn't contain any financial data, they are all stored on the bill object
 class Purchase < ApplicationRecord
@@ -34,12 +34,12 @@ end
 
 Functions should have commments inside & outside:
 * Inside
-  * Reading the comments should describe everything going on in the function
+  * Reading the comments should describe everything going on in the function.
   * I know, Ruby is super easy to read and doesn't require much commenting. Don't be a player here, just comment your code like it was designed to send a rocket on the moon. And yes, we do send rockets on the moon!
 * Outside
   * Add your name along with the list of authors
   * Add a short description about what the function does
-  
+
 Exemple below:
 
 ````ruby
@@ -49,10 +49,10 @@ Exemple below:
     def fetch_and_update_expiration_date
       # collect the current expiration date
       current_expiration_date = self.expiration_date
-      
+
       # Fetch the real expiration date of the HTTPs certificate
       new_expiration_date = WebCertificatesService.fetch_expiry_date(self.url)
-      
+
       #Update the expiration date if new expiration date has real value or keep the old one
       self.update_attribute(:expiration_date, new_expiration_date || current_expiration_date)
     end
@@ -74,11 +74,13 @@ We have the following branches in each project:
     * Each issue has its own branch
 
 # Merge requests
+
 ## When
 
 Branch early, branch often.
 
 As soon as you start working on an issue, open a branch and push it to our gitlab server.
+
 ## What
 
 Any issue that you work on should be handled in a **feature branch** with the following name format `#{issue-id} short description`.
@@ -128,7 +130,7 @@ In any case, you have to push at least two times per **feature branch**:
 
 # To-dos
 
-List here all the section and stuff you would like or whish someone could to talk about in a next PR
+List here all the section and stuff you would like or wish someone could to talk about in a next PR
 
 * moduloTech gem
 * Rubocop
