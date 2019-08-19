@@ -119,9 +119,13 @@ As soon as you start working on an issue, open a branch and push it to our gitla
 
 ## What
 
-Any issue that you work on should be handled in a **feature branch** with the following name format `#{issue-id} short description`.
+Any issue that you work on should be handled in a **feature branch** with the following name format `#{issue-id}-short_description`.
 
-**feature branches** are very useful and efficient in the following scenarios:
+Example:
+
+`#363-fidelia_trucks_import`
+
+**Feature branches** are very useful and efficient in the following scenarios:
   * It greatly helps the reviewer to understand what the MR's topic is
   * If the reviewer has comments awaiting for your response, you will only slow down the release of this particular feature instead of your whole work
   * Cherry picking is now super easy too
