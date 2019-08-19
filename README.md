@@ -164,6 +164,76 @@ In any case, you have to push at least two times per **feature branch**:
 - Caution: You have to push your code everytime you leave the office, especially at the end of the day.
 ```
 
+## Commit messages
+
+A **good** commit message describe why a change was made, what is the context of the change. To achieve this goal, seven rules must be respected on commit message redaction.
+
+1. Separate subject from body with a blank line
+2. Limit the subject line to 50 characters
+3. Capitalize the subject line
+4. Do not end the subject line with a period
+5. Use the imperative mood in the subject line
+6. Wrap the body at 72 characters
+7. Use the body to explain what and why vs. how
+
+### Examples below:
+
+- A very long and descriptive example of the rules:
+
+```
+Summarize changes in around 50 characters or less
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequences of this
+change? Here's the place to explain them.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded
+   by a single space, with blank lines in between, but conventions
+   vary here
+
+If you use an issue tracker, put references to them at the bottom,
+like this:
+
+Resolves: #123
+See also: #456, #789
+```
+
+- In this example, the issue number prefixes the real message and there is no body:
+```
+[#326] Display refusals in job bills tab
+```
+
+Full detail on each rule can be found in the following article: https://chris.beams.io/posts/git-commit/.
+
+### Work in Progress
+
+Since our push policy is to push our work at the end of the day, it is often mandatory to do 'WiP commits'.
+If possible, the best thing is to use `git rebase` to keep those commits out of the finished work.
+But sometimes, those commits can't be squashed. In that case, they must be identified as WiP commits and must respect the usual format.
+
+Example of a WiP commit:
+
+```
+[#505][WiP] Add SearchSorting TS component
+
+TODO:
+
+- BO implem
+- Style on `th` cells
+```
+
 # To-dos
 
 List here all the section and stuff you would like or wish someone could to talk about in a next PR
@@ -174,4 +244,5 @@ List here all the section and stuff you would like or wish someone could to talk
 
 # Changes
 * ...
+* ciappa_m - Add a section about commit messages
 * philib_j - initial commit
