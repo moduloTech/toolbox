@@ -32,31 +32,67 @@ end
 
 ## Functions
 
-Functions should have commments inside & outside:
+Functions should have comments inside & outside:
 * Inside
   * Reading the comments should describe everything going on in the function.
   * I know, Ruby is super easy to read and doesn't require much commenting. Don't be a player here, just comment your code like it was designed to send a rocket on the moon. And yes, we do send rockets on the moon!
 * Outside
   * Add your name along with the list of authors
   * Add a short description about what the function does
+  * Document type/format for input arguments and return values using YARD tags (https://rubydoc.info/gems/yard/file/docs/GettingStarted.md)
 
-Exemple below:
+Example below:
 
-````ruby
+```ruby
   private
-    # Author: philib_j
-    # Updates the proper attribute for the expiration date
-    def fetch_and_update_expiration_date
-      # collect the current expiration date
-      current_expiration_date = self.expiration_date
 
-      # Fetch the real expiration date of the HTTPs certificate
-      new_expiration_date = WebCertificatesService.fetch_expiry_date(self.url)
+  # Author: ciappa_m
+  # This helper simplifies the writing of new exports.
+  # It creates a package with a sheet containing a head row with titles in bold, 14 points.
+  # Then it iterates over the given collection yielding the sheet and the item.
+  # Caller is responsible for filling the sheet with as many rows as wanted for each item.
+  #
+  # @param collection [#find_each|#each]
+  # @param header_row_method [Symbol|String] Identifier of a method in this service to generate
+  #   a head row for the spreadsheet
+  # @param block [Proc] Block with the current sheet and the current item from the given
+  #   collection as arguments; It is mandatory and call will fail if block is not given.
+  # @return [Axlsx::Package] Generated XLSX package
+  def package_build(collection, header_row_method)
+    # Creating, initializing and returning the +Axlsx+ package
+    Axlsx::Package.new do |package|
+      workbook = package.workbook
 
-      #Update the expiration date if new expiration date has real value or keep the old one
-      self.update_attribute(:expiration_date, new_expiration_date || current_expiration_date)
+      workbook.styles do |styles|
+        # Defines the style for the row of the header
+        head_row = styles.add_style b: true, sz: 14
+
+        # Add the first (and only) worksheet of the export named using current time
+        workbook.add_worksheet(name: Time.zone.now.strftime('%d-%m-%Y %Hh%M')) do |sheet|
+          # First row is the head with the style defined earlier
+          sheet.add_row(send(header_row_method), style: head_row)
+
+          # If the collection is an ActiveRecord relationship, we use +find_each+ to iterate with
+          # batches and to avoid the loading of the whole collection in memory
+          # else it is a pure Ruby collection and we iterate with classic +each+
+          # In both cases, we yield the given block with the current sheet and the current item as
+          # arguments
+          #
+          # NB: No use of +block_given?+ since the method is kinda useless without a block
+          if collection.respond_to?(:find_each)
+            collection.find_each do |item|
+              yield(sheet, item)
+            end
+          else
+            collection.each do |item|
+              yield(sheet, item)
+            end
+          end
+        end
+      end
     end
-````
+  end
+```
 
 # Branches
 
