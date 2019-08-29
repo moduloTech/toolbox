@@ -2,19 +2,19 @@
 
 This readme file is only for the eyes of the Ruby On Rails teams at moduloTech.
 
-There are plans to update it to the rest of the world in a few weeks
+There are plans to update it to the rest of the world in a few weeks.
 
 # Introduction
 
-Standardizing our development process and habits is part of our startegy to embrace a pleasant journey as any developper belonging to moduloTech should be able to think and write code in the exact same way as another one.
+Standardizing our development process and habits is part of our strategy to embrace a pleasant journey as any developper belonging to moduloTech should be able to think and write code in the exact same way as another one.
 
-This Handbook has been written and updated by all the developers of moduloTech, feel free to submit your own pull request and keep this page **beautiful** and **uptodate**
+This Handbook has been written and updated by all the developers of moduloTech, feel free to submit your own pull request and keep this page **beautiful** and **up to date**.
 
 Any time you feel like someone is slipping away from this methodology, feel free to push them back to this document.
 
 # Comments
 
-Commenting your code is mandatory and part of the process of making friends at moduloTech YaY 😃 
+Commenting your code is mandatory and part of the process of making friends at moduloTech YaY 😃
 
 ## Classes
 
@@ -23,7 +23,7 @@ Each Class file needs at least an **author** and a **description** that describe
 ````ruby
 # Author: philib_j
 # Purchase model has a very simple purpose, it is storing all the purchases
-# that we maid along with the PDF
+# that we made along with the PDF
 # it belongs to a supplier
 # it doesn't contain any financial data, they are all stored on the bill object
 class Purchase < ApplicationRecord
@@ -32,31 +32,67 @@ end
 
 ## Functions
 
-Functions should have commments inside & outside:
+Functions should have comments inside & outside:
 * Inside
-  * Reading the comments should describe everything going on in the function
+  * Reading the comments should describe everything going on in the function.
   * I know, Ruby is super easy to read and doesn't require much commenting. Don't be a player here, just comment your code like it was designed to send a rocket on the moon. And yes, we do send rockets on the moon!
 * Outside
   * Add your name along with the list of authors
   * Add a short description about what the function does
-  
-Exemple below:
+  * Document type/format for input arguments and return values using YARD tags (https://rubydoc.info/gems/yard/file/docs/GettingStarted.md)
 
-````ruby
+Example below:
+
+```ruby
   private
-    # Author: philib_j
-    # Updates the proper attribute for the expiration date
-    def fetch_and_update_expiration_date
-      # collect the current expiration date
-      current_expiration_date = self.expiration_date
-      
-      # Fetch the real expiration date of the HTTPs certificate
-      new_expiration_date = WebCertificatesService.fetch_expiry_date(self.url)
-      
-      #Update the expiration date if new expiration date has real value or keep the old one
-      self.update_attribute(:expiration_date, new_expiration_date || current_expiration_date)
+
+  # Author: ciappa_m
+  # This helper simplifies the writing of new exports.
+  # It creates a package with a sheet containing a head row with titles in bold, 14 points.
+  # Then it iterates over the given collection yielding the sheet and the item.
+  # Caller is responsible for filling the sheet with as many rows as wanted for each item.
+  #
+  # @param collection [#find_each|#each]
+  # @param header_row_method [Symbol|String] Identifier of a method in this service to generate
+  #   a head row for the spreadsheet
+  # @param block [Proc] Block with the current sheet and the current item from the given
+  #   collection as arguments; It is mandatory and call will fail if block is not given.
+  # @return [Axlsx::Package] Generated XLSX package
+  def package_build(collection, header_row_method)
+    # Creating, initializing and returning the +Axlsx+ package
+    Axlsx::Package.new do |package|
+      workbook = package.workbook
+
+      workbook.styles do |styles|
+        # Defines the style for the row of the header
+        head_row = styles.add_style b: true, sz: 14
+
+        # Add the first (and only) worksheet of the export named using current time
+        workbook.add_worksheet(name: Time.zone.now.strftime('%d-%m-%Y %Hh%M')) do |sheet|
+          # First row is the head with the style defined earlier
+          sheet.add_row(send(header_row_method), style: head_row)
+
+          # If the collection is an ActiveRecord relationship, we use +find_each+ to iterate with
+          # batches and to avoid the loading of the whole collection in memory
+          # else it is a pure Ruby collection and we iterate with classic +each+
+          # In both cases, we yield the given block with the current sheet and the current item as
+          # arguments
+          #
+          # NB: No use of +block_given?+ since the method is kinda useless without a block
+          if collection.respond_to?(:find_each)
+            collection.find_each do |item|
+              yield(sheet, item)
+            end
+          else
+            collection.each do |item|
+              yield(sheet, item)
+            end
+          end
+        end
+      end
     end
-````
+  end
+```
 
 # Branches
 
@@ -74,16 +110,22 @@ We have the following branches in each project:
     * Each issue has its own branch
 
 # Merge requests
+
 ## When
 
 Branch early, branch often.
 
 As soon as you start working on an issue, open a branch and push it to our gitlab server.
+
 ## What
 
-Any issue that you work on should be handled in a **feature branch** with the following name format `#{issue-id} short description`.
+Any issue that you work on should be handled in a **feature branch** with the following name format `#{issue-id}-short_description`.
 
-**feature branches** are very useful and efficient in the following scenarios:
+Example:
+
+`#363-fidelia_trucks_import`
+
+**Feature branches** are very useful and efficient in the following scenarios:
   * It greatly helps the reviewer to understand what the MR's topic is
   * If the reviewer has comments awaiting for your response, you will only slow down the release of this particular feature instead of your whole work
   * Cherry picking is now super easy too
@@ -126,9 +168,79 @@ In any case, you have to push at least two times per **feature branch**:
 - Caution: You have to push your code everytime you leave the office, especially at the end of the day.
 ```
 
+## Commit messages
+
+A **good** commit message describe why a change was made, what is the context of the change. To achieve this goal, seven rules must be respected on commit message redaction.
+
+1. Separate subject from body with a blank line
+2. Limit the subject line to 50 characters
+3. Capitalize the subject line
+4. Do not end the subject line with a period
+5. Use the imperative mood in the subject line
+6. Wrap the body at 72 characters
+7. Use the body to explain what and why vs. how
+
+### Examples below:
+
+- A very long and descriptive example of the rules:
+
+```
+Summarize changes in around 50 characters or less
+
+More detailed explanatory text, if necessary. Wrap it to about 72
+characters or so. In some contexts, the first line is treated as the
+subject of the commit and the rest of the text as the body. The
+blank line separating the summary from the body is critical (unless
+you omit the body entirely); various tools like `log`, `shortlog`
+and `rebase` can get confused if you run the two together.
+
+Explain the problem that this commit is solving. Focus on why you
+are making this change as opposed to how (the code explains that).
+Are there side effects or other unintuitive consequences of this
+change? Here's the place to explain them.
+
+Further paragraphs come after blank lines.
+
+ - Bullet points are okay, too
+
+ - Typically a hyphen or asterisk is used for the bullet, preceded
+   by a single space, with blank lines in between, but conventions
+   vary here
+
+If you use an issue tracker, put references to them at the bottom,
+like this:
+
+Resolves: #123
+See also: #456, #789
+```
+
+- In this example, the issue number prefixes the real message and there is no body:
+```
+[#326] Display refusals in job bills tab
+```
+
+Full detail on each rule can be found in the following article: https://chris.beams.io/posts/git-commit/.
+
+### Work in Progress
+
+Since our push policy is to push our work at the end of the day, it is often mandatory to do 'WiP commits'.
+If possible, the best thing is to use `git rebase` to keep those commits out of the finished work.
+But sometimes, those commits can't be squashed. In that case, they must be identified as WiP commits and must respect the usual format.
+
+Example of a WiP commit:
+
+```
+[#505][WiP] Add SearchSorting TS component
+
+TODO:
+
+- BO implem
+- Style on `th` cells
+```
+
 # To-dos
 
-List here all the section and stuff you would like or whish someone could to talk about in a next PR
+List here all the section and stuff you would like or wish someone could to talk about in a next PR
 
 * moduloTech gem
 * Rubocop
@@ -140,4 +252,5 @@ List here all the section and stuff you would like or whish someone could to tal
 
 # Changes
 * ...
+* ciappa_m - Add a section about commit messages
 * philib_j - initial commit
