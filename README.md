@@ -238,19 +238,35 @@ TODO:
 - Style on `th` cells
 ```
 
+# Depdendency license check
+
+When adding/upgrading third-party dependencies (gems, packages, extensions, etc.) we should check their licenses for ability to use inside the proprietary software we develop. [Licensed](https://github.com/github/licensed) gem can be used to cache and check dependencies' licenses.
+Default whitelist is:
+- mit
+- apache-2.0
+- bsd-2-clause
+- bsd-3-clause
+- cc0-1.0
+
+Best solution would be integrating check script to dev pipeline's CI/CD.
+
 # To-dos
 
 List here all the section and stuff you would like or wish someone could to talk about in a next PR
 
 * moduloTech gem
-* Rubocop
+* Rubocop and rubocop-rails
 * CI/CD
+  * use [Licensed](https://github.com/github/licensed) script to check new/updated dependencies' licenses
+  * use rubocop as part of CI pipeline
 * single-developer workflow - feature branches needed?
 * adopt rdoc or some other documentation standard for automation
-* develop an rspec test that will check the code comments consistensy
+* develop a rubocop cop that will check the code comments consistensy (rspec test would be way too slow in comparison with rubocop's parser. there is no need to adopt parser itself - rubocop has all necessary helpers/classes/configuration builtin)
 * develop/adopt an instrument to automatically generate/update comments in the code
+* GDPR
 
 # Changes
 * ...
+* varaby_m - Add section about dependencies' licenses
 * ciappa_m - Add a section about commit messages
 * philib_j - initial commit
