@@ -279,6 +279,7 @@ List here all the section and stuff you would like or wish someone could to talk
 
 # Changes
 * ...
+* philib_j - Added information about r.sh
 * varaby_m - Add section about dependencies' licenses
 * ciappa_m - Add a section about commit messages
 * philib_j - initial commit
