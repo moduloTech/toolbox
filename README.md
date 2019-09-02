@@ -238,6 +238,18 @@ TODO:
 - Style on `th` cells
 ```
 
+# r.sh the easy way to boot a project
+
+Each project should have an r.sh file. This script shell has to contain everything needed to start the project right after downloading the repository.
+
+Here is a very short version of what it should contain:
+
+````sh
+#!/bin/sh
+rake db:migrate:reset
+rake db:seed
+````
+
 # Depdendency license check
 
 When adding/upgrading third-party dependencies (gems, packages, extensions, etc.) we should check their licenses for ability to use inside the proprietary software we develop. [Licensed](https://github.com/github/licensed) gem can be used to cache and check dependencies' licenses.
