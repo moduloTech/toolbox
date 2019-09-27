@@ -109,6 +109,10 @@ We have the following branches in each project:
   * feature-branches
     * Each issue has its own branch
 
+### Single-dev workflow - feature branches
+
+Working on the project single also requires feature branches. Why? Well, there is at least one benefit of feature branches: you can squash all your feature commits into **single feature-commit** when merging it to master. This makes master pure: it would consist of a few commits (each with a huge bunch of changes within). Multiple commits per feature create a mess in the file git history - we sometimes change the same file continuously trying to build the better ~world~ code. But those changes don't play any role in the understanding of the code nor improve readability.
+
 # Merge requests
 
 ## When
@@ -271,7 +275,6 @@ List here all the section and stuff you would like or wish someone could to talk
 * CI/CD
   * use [Licensed](https://github.com/github/licensed) script to check new/updated dependencies' licenses
   * use rubocop as part of CI pipeline
-* single-developer workflow - feature branches needed?
 * adopt rdoc or some other documentation standard for automation
 * develop a rubocop cop that will check the code comments consistensy (rspec test would be way too slow in comparison with rubocop's parser. there is no need to adopt parser itself - rubocop has all necessary helpers/classes/configuration builtin)
 * develop/adopt an instrument to automatically generate/update comments in the code
