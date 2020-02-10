@@ -262,12 +262,24 @@ Default whitelist is:
 
 Best solution would be integrating check script to dev pipeline's CI/CD.
 
+# Rubocop
+
+Rubocop is a linter for ruby. It can be extended for Ruby on Rails using the gem rubocop-rails. Add the following lines in your Gemfile to begin using Rubocop.
+
+```ruby
+group :development do
+  gem 'rubocop', '~> 0.79.0'
+  gem 'rubocop-rails', '~> 2.4', '>= 2.4.2'
+end
+```
+
+A configuration file compliant with those versions can be found in the `config_files` directory.
+
 # To-dos
 
 List here all the section and stuff you would like or wish someone could to talk about in a next PR
 
 * moduloTech gem
-* Rubocop and rubocop-rails
 * CI/CD
   * use [Licensed](https://github.com/github/licensed) script to check new/updated dependencies' licenses
   * use rubocop as part of CI pipeline
@@ -279,6 +291,7 @@ List here all the section and stuff you would like or wish someone could to talk
 
 # Changes
 * ...
+* ciappa_m - Add section about Rubocop
 * philib_j - Added information about r.sh
 * varaby_m - Add section about dependencies' licenses
 * ciappa_m - Add a section about commit messages
