@@ -16,6 +16,9 @@ Any time you feel like someone is slipping away from this methodology, feel free
 
 Commenting your code is mandatory and part of the process of making friends at moduloTech YaY 😃
 
+A commented portion of the code **MUST** be followed by a blank line to keep the code enjoyable to the eyes.
+Blank lines are free to use after all!
+
 ## Classes
 
 Each Class file needs at least an **author** and a **description** that describes the purpose of this class. See example below:
@@ -35,7 +38,10 @@ end
 Functions should have comments inside & outside:
 * Inside
   * Reading the comments should describe everything going on in the function.
-  * I know, Ruby is super easy to read and doesn't require much commenting. Don't be a player here, just comment your code like it was designed to send a rocket on the moon. And yes, we do send rockets on the moon!
+  * The main goal of your comments should always be to explain **WHY** the code is written.
+  * Your code and the namings you use can convey the **what** and the **how**, but it is almost impossible to explicit the **why** using pure code.
+  * Although Ruby is super easy to read and doesn't require much commenting, explicit the **what** and the **how** of the code.
+  * Don't be a player! Comment your code like it was designed to send a rocket on the moon. And yes, we do send rockets on the moon!
 * Outside
   * Add your name along with the list of authors
   * Add a short description about what the function does
@@ -279,7 +285,8 @@ List here all the section and stuff you would like or wish someone could to talk
 
 # Changes
 * ...
-* philib_j - Added information about r.sh
+* ciappa_m - Expand the comments section
+* philib_j - Add information about r.sh
 * varaby_m - Add section about dependencies' licenses
 * ciappa_m - Add a section about commit messages
-* philib_j - initial commit
+* philib_j - Initial commit
