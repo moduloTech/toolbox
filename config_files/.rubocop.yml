@@ -1,6 +1,9 @@
-require: 'rubocop-rails'
+# Enabling Rails-specific cops
+require: rubocop-rails
 
 AllCops:
+
+  # Excluding most directories with generated files and directories with configuration files
   Exclude:
     - 'vendor/**/*'
     - 'db/*'
@@ -20,9 +23,7 @@ AllCops:
     - 'spec/spec_helper.rb'
     - 'node_modules/**/*'
 
-Rails:
-  Enabled: true
-
+# Instructing rubocop about all non-standard environments
 Rails/UnknownEnv:
   Environments:
     - production
@@ -31,7 +32,7 @@ Rails/UnknownEnv:
     - staging
 
 # Commonly used screens these days easily fit more than 80 characters.
-Metrics/LineLength:
+Layout/LineLength:
   Max: 100
   Exclude:
     - 'config/*'
@@ -55,7 +56,7 @@ Style/SymbolArray:
   Enabled: true
 
 # Most readable form.
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedHashRocketStyle: table
   EnforcedColonStyle: table
 
@@ -70,6 +71,10 @@ Style/PreferredHashMethods:
 # String#% is by far the least verbose and only object oriented variant.
 Style/FormatString:
   EnforcedStyle: percent
+
+# Annotated or template are too verbose and rarely needed.
+Style/FormatStringToken:
+  EnforcedStyle: unannotated
 
 Style/CollectionMethods:
   Enabled: true
@@ -104,7 +109,7 @@ Style/SignalException:
 # Suppressing exceptions can be perfectly fine, and be it to avoid to
 # explicitly type nil into the rescue since that's what you want to return,
 # or suppressing LoadError for optional dependencies
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Enabled: false
 
 # { ... } for multi-line blocks is okay, follow Weirichs rule instead:
@@ -212,3 +217,7 @@ Style/PercentLiteralDelimiters:
 Rails/Output:
   Exclude:
     - 'config/deploy.rb'
+
+# It brings pain for no real benefits
+Metrics/ModuleLength:
+  Enabled: false
