@@ -52,18 +52,35 @@ Example below:
 ```ruby
   private
 
-  # Author: ciappa_m
+  # @author ciappa_m
+  # @private
+  #
   # This helper simplifies the writing of new exports.
   # It creates a package with a sheet containing a head row with titles in bold, 14 points.
   # Then it iterates over the given collection yielding the sheet and the item.
   # Caller is responsible for filling the sheet with as many rows as wanted for each item.
   #
-  # @param collection [#find_each|#each]
-  # @param header_row_method [Symbol|String] Identifier of a method in this service to generate
+  # @example Generate an export with two columns using a Hash as the collection
+  #   package_build(rows, :make_header_row_for_esd_export) do |sheet, row|
+  #     # package_build iterates on the rows using #each and rows is a Hash of client invoices
+  #     # grouped by VAT reference so row is an array with the vat reference as first entry and
+  #     # the invoice list as second and last entry
+  #     vat_reference = row[0]
+  #     invoices      = row[1]
+  #     price         = invoices.sum(&:price_esd_total).floor
+  #
+  #     sheet.add_row([vat_reference, price])
+  #   end
+  #
+  # @param collection [#find_each,#each]
+  # @param header_row_method [Symbol,String] Identifier of a method in this service to generate
   #   a head row for the spreadsheet
-  # @param block [Proc] Block with the current sheet and the current item from the given
-  #   collection as arguments; It is mandatory and call will fail if block is not given.
+  # @yield [sheet, item] Block with the current sheet and the current item from the given
+  #   collection as arguments
+  # @yieldparam [Axlsx::Worksheet] The current sheet
+  # @yieldparam [Object] The current item from the given collection
   # @return [Axlsx::Package] Generated XLSX package
+  # @raise [LocalJumpError] if no block is given
   def package_build(collection, header_row_method)
     # Creating, initializing and returning the +Axlsx+ package
     Axlsx::Package.new do |package|
