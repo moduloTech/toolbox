@@ -39,8 +39,9 @@ Functions should have comments inside & outside:
 * Inside
   * Reading the comments should describe everything going on in the function.
   * The main goal of your comments should always be to explain **WHY** the code is written.
-  * Your code and the namings you use can convey the **what** and the **how**, but it is almost impossible to explicit the **why** using pure code.
-  * Although Ruby is super easy to read and doesn't require much commenting, explicit the **what** and the **how** of the code.
+  * Your code and the names of your variables, methods and other symbols can convey the **what** and the **how**, but it is almost impossible to explicit the **why** only with your code.
+  * Although Ruby is super easy to read and doesn't require much commenting, it is never wrong to explicit the **what** and the **how** of the code.
+  * Anticipate the questions you will have reading your code months later. Then, anticipate the questions other developers will have reading your code when you can't answer their questions. :scream: 
   * Don't be a player! Comment your code like it was designed to send a rocket on the moon. And yes, we do send rockets on the moon!
 * Outside
   * Add your name along with the list of authors
