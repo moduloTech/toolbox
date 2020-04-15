@@ -304,8 +304,59 @@ List here all the section and stuff you would like or wish someone could to talk
 * develop/adopt an instrument to automatically generate/update comments in the code
 * GDPR
 
+# Rails Arel
+
+Instead of using raw SQL for complex queries we can use [Rails/Arel](https://github.com/rails/arel).
+Using Arel makes your code more railsish and sexy
+(grants +3 RoR power and colleagues respect (not guaranteed)).
+
+### Usage example
+We've got companies with users. Let's list companies where users haven't logged in last week and count them.
+
+```postgresql
+SELECT "companies"."name", COUNT("users"."id") FROM "users"
+INNER JOIN "companies" ON "companies"."id" = "users"."company_id"
+WHERE ("users"."last_sign_in_at" < (current_timestamp - '7 days'::interval) 
+       OR "users"."last_sign_in_at" IS NULL)
+GROUP BY "companies"."id"
+```
+
+Without Arel:
+
+```ruby
+User.joins(:company)
+    .where('users.last_sign_in_at < ? or users.last_sign_in_at is null', 7.days.ago)
+    .group('companies.id')
+    .pluck('companies.name', 'count(users.id)')
+```
+
+With Arel:
+
+```ruby
+company = Company.arel_table
+user = User.arel_table
+last_sign_in_at = user[:last_sign_in_at]
+User.joins(:company)
+    .where(last_sign_in_at.lt(7.days.ago).or(last_sign_in_at.eq(nil)))
+    .group(company[:id])
+    .pluck(company[:name], user[:id].count)
+```
+
+Though Arel syntax might seem more verbose, it hides much power within. 
+You'll see it when you need to add variable column set with different order/conditions.
+It allows you to easily avoid possible injections and typos.
+
+### Arel helps when:
+* making comparison `> (gt)`, `< (lt)`, `>= (gteq)`, `<= (lteq)`
+* adding conditions to left join
+* re-using complex tables/fields with aliases
+* building configurable DB requests
+* safely apply order and direction
+* ...
+
 # Changes
 * ...
+* varaby_m - Arel section
 * ciappa_m - Expand the comments section
 * philib_j - Add information about r.sh
 * varaby_m - Add section about dependencies' licenses
